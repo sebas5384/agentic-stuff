@@ -150,6 +150,8 @@ export default defineSchema({
 
 ## Supporting References
 
+The reference files live alongside `SKILL.md` in this folder.
+
 - [custom-functions.md](custom-functions.md)
 - [domain-models.md](domain-models.md)
 - [value-objects.md](value-objects.md)

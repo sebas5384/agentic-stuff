@@ -14,11 +14,11 @@ Use this document as a practical reference while planning and executing incremen
 - ID generation logic that uses `ctx.db` belongs in `adapters/`, not `_libs/`, because it performs database operations.
 - During incremental repository adoption, cross-domain `ctx.db.get()` is a temporary bridge only. Track each use and replace it once the target domain exposes a repository.
 
-## Validators and Types
+## DTOs, models, and types
 
 - Use `withoutSystemFields` from `convex-helpers` only in model files to derive `NewXModel`; everywhere else reference `NewXModel` directly.
-- Prefer native Convex validator methods (`.pick()`, `.omit()`, `.extend()`, `.partial()`) over `convex-helpers` `pick`/`omit` utility functions for deriving mutation args.
-- Mutation-specific args (DTOs) should be derived in the mutation file, not defined as types in domain model files.
+- Prefer native Convex `VObject` methods (`.pick()`, `.omit()`, `.extend()`, `.partial()`) on domain `*Model` validators over spreading `pick()` from `convex-helpers` on `.fields`.
+- Name Convex `v.object(...)` used for a specific function’s `args` / `returns` with a `*Dto` suffix when it helps; **define DTOs in that query or mutation file**, not under `domain/`. Derive from domain `*Model` using `VObject.pick` / `.extend` when the wire shape matches a document subset.
 
 ## Schema
 

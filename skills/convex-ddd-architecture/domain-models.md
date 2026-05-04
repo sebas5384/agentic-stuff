@@ -147,6 +147,16 @@ export type Contact = {
 };
 ```
 
+### 5. API shapes (DTOs) vs domain models
+
+**Domain `domain/` holds persisted shapes**: `*Model`, `New*Model`, aggregates. **Do not** put query or mutation **DTO** definitions there—DTOs describe a specific function’s `args` / `returns` wire contract and belong **in that query or mutation file** (or beside it if split for size). Name local DTO `v.object(...)` values with a `*Dto` suffix when helpful for readability.
+
+Do **not** add channel- or feature-specific picks of a model (for example `WorkItemModel.pick(...)` for an assistant tool) to `domain/*.model.ts`—those belong next to the handler that returns them.
+
+When a return or argument shape is a **subset or extension of a table document**, derive it in the handler file from the domain model using `SomeModel.pick(...).extend({ ... })` so it cannot drift from the model. Reusability across the domain is for **models**, not for API DTOs.
+
+When **several queries in the same module** share one composite wire shape, factor it into **a single file next to those queries** (for example `queries/boardStructure.dtos.ts`), not under `domain/`.
+
 ## Aggregate Pattern
 
 ### Purpose
