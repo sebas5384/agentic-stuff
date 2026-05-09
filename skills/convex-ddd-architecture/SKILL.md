@@ -1,6 +1,6 @@
 ---
 name: convex-ddd-architecture
-description: Use when structuring or refactoring Convex codebases with Domain-Driven Design boundaries, repository abstractions, adapters for external APIs, and transaction-safe workflows.
+description: Use when structuring or refactoring Convex codebases with Domain-Driven Design boundaries, repository abstractions, adapters for external APIs, and transaction-safe workflows. Also use for naming—ubiquitous language, bounded context, short locals inside clear parent scope (avoid verbose identifiers).
 ---
 
 # Convex DDD Architecture
@@ -17,6 +17,7 @@ Use this skill when work includes one or more of these signals:
 - Direct `ctx.db` access spreading outside repositories
 - External API calls requiring retries, orchestration, or translation layers
 - Team-level need for consistent file layout and naming in Convex projects
+- Choosing or refactoring **identifiers** (variables, functions): domain nouns on exports/models; shorter names inside modules/functions where scope already disambiguates ([naming.md](naming.md))
 
 Do not use this as a strict template for tiny prototypes where speed matters more than architectural boundaries.
 
@@ -56,6 +57,7 @@ Do not use this as a strict template for tiny prototypes where speed matters mor
 - **Files**: Use camelCase (`contactRepository.ts`, `sendInvoice.action.ts`)
 - **Underscore prefix**: For non-domain files (`_tables.ts`, `_triggers.ts`)
 - **Directory vs file**: Start with a file (for example `_workflows.ts`), split into a directory after growth
+- **Identifiers**: Domain vocabulary on exports, models, and APIs; inside functions prefer short nouns when the parent name/type already supplies context—do not repeat file or parent names on every local. Details: [naming.md](naming.md).
 
 ## Quick Reference
 
@@ -142,6 +144,7 @@ export default defineSchema({
 
 ## Common Mistakes
 
+- Overly verbose locals that restate file or function context instead of narrowing scope or extracting a smaller unit ([naming.md](naming.md))
 - Importing handlers directly from `_generated/server` and bypassing shared wrappers
 - Writing business rules in actions or handlers instead of aggregates
 - Updating records with ad-hoc field mutations rather than aggregate transitions
@@ -159,6 +162,7 @@ The reference files live alongside `SKILL.md` in this folder.
 - [adapters.md](adapters.md)
 - [triggers.md](triggers.md)
 - [migrations.md](migrations.md)
+- [naming.md](naming.md)
 - [learnings.md](learnings.md)
 - [eslint-rules.md](eslint-rules.md)
 - [examples.md](examples.md)
