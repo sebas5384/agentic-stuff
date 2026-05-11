@@ -12,7 +12,8 @@ This repository contains reusable AI agent skills, organized under the `skills/`
 skills/
   <skill-name>/
     SKILL.md
-    supporting-docs.md
+    references/
+      supporting-doc.md
 ```
 
-Each skill folder includes a `SKILL.md` entrypoint and optional supporting references.
+Each skill folder includes a `SKILL.md` entrypoint and optional supporting documents under `references/`.

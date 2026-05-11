@@ -17,7 +17,7 @@ Use this skill when work includes one or more of these signals:
 - Direct `ctx.db` access spreading outside repositories
 - External API calls requiring retries, orchestration, or translation layers
 - Team-level need for consistent file layout and naming in Convex projects
-- Choosing or refactoring **identifiers** (variables, functions): domain nouns on exports/models; shorter names inside modules/functions where scope already disambiguates ([naming.md](naming.md))
+- Choosing or refactoring **identifiers** (variables, functions): domain nouns on exports/models; shorter names inside modules/functions where scope already disambiguates ([naming.md](references/naming.md))
 
 Do not use this as a strict template for tiny prototypes where speed matters more than architectural boundaries.
 
@@ -57,7 +57,7 @@ Do not use this as a strict template for tiny prototypes where speed matters mor
 - **Files**: Use camelCase (`contactRepository.ts`, `sendInvoice.action.ts`)
 - **Underscore prefix**: For non-domain files (`_tables.ts`, `_triggers.ts`)
 - **Directory vs file**: Start with a file (for example `_workflows.ts`), split into a directory after growth
-- **Identifiers**: Domain vocabulary on exports, models, and APIs; inside functions prefer short nouns when the parent name/type already supplies context—do not repeat file or parent names on every local. Details: [naming.md](naming.md).
+- **Identifiers**: Domain vocabulary on exports, models, and APIs; inside functions prefer short nouns when the parent name/type already supplies context—do not repeat file or parent names on every local. Details: [naming.md](references/naming.md).
 
 ## Quick Reference
 
@@ -74,7 +74,7 @@ Do not use this as a strict template for tiny prototypes where speed matters mor
 
 ### 1) Custom Functions Boundary
 
-Always import `mutation`, `query`, `internalMutation` from `customFunctions.ts`, not from `_generated/server`. See [custom-functions.md](custom-functions.md).
+Always import `mutation`, `query`, `internalMutation` from `customFunctions.ts`, not from `_generated/server`. See [custom-functions.md](references/custom-functions.md).
 
 ```typescript
 // ✅ Correct
@@ -131,10 +131,10 @@ export default defineSchema({
 
 ### 4) Domain + Repository + Adapter Roles
 
-- Domain models and aggregates define invariants ([domain-models.md](domain-models.md))
-- Repositories isolate persistence logic ([repositories.md](repositories.md))
-- Actions adapt external DTOs and call mutations for business transitions ([adapters.md](adapters.md))
-- Triggers and workflows orchestrate reliable side effects ([triggers.md](triggers.md))
+- Domain models and aggregates define invariants ([domain-models.md](references/domain-models.md))
+- Repositories isolate persistence logic ([repositories.md](references/repositories.md))
+- Actions adapt external DTOs and call mutations for business transitions ([adapters.md](references/adapters.md))
+- Triggers and workflows orchestrate reliable side effects ([triggers.md](references/triggers.md))
 
 ### 5) Workflow and Trigger Safety
 
@@ -144,25 +144,25 @@ export default defineSchema({
 
 ## Common Mistakes
 
-- Overly verbose locals that restate file or function context instead of narrowing scope or extracting a smaller unit ([naming.md](naming.md))
+- Overly verbose locals that restate file or function context instead of narrowing scope or extracting a smaller unit ([naming.md](references/naming.md))
 - Importing handlers directly from `_generated/server` and bypassing shared wrappers
 - Writing business rules in actions or handlers instead of aggregates
 - Updating records with ad-hoc field mutations rather than aggregate transitions
 - Returning raw records where aggregate behavior is expected
-- Introducing required schema fields without staged migration strategy ([migrations.md](migrations.md))
+- Introducing required schema fields without staged migration strategy ([migrations.md](references/migrations.md))
 
 ## Supporting References
 
-The reference files live alongside `SKILL.md` in this folder.
+Supporting documents live in the `references/` directory.
 
-- [custom-functions.md](custom-functions.md)
-- [domain-models.md](domain-models.md)
-- [value-objects.md](value-objects.md)
-- [repositories.md](repositories.md)
-- [adapters.md](adapters.md)
-- [triggers.md](triggers.md)
-- [migrations.md](migrations.md)
-- [naming.md](naming.md)
-- [learnings.md](learnings.md)
-- [eslint-rules.md](eslint-rules.md)
-- [examples.md](examples.md)
+- [custom-functions.md](references/custom-functions.md)
+- [domain-models.md](references/domain-models.md)
+- [value-objects.md](references/value-objects.md)
+- [repositories.md](references/repositories.md)
+- [adapters.md](references/adapters.md)
+- [triggers.md](references/triggers.md)
+- [migrations.md](references/migrations.md)
+- [naming.md](references/naming.md)
+- [learnings.md](references/learnings.md)
+- [eslint-rules.md](references/eslint-rules.md)
+- [examples.md](references/examples.md)
